@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+       
+.product {
+  width: 300px;
+  margin: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.items {
+  margin-bottom: 10px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+
+button {
+  padding: 3px 8px;
+  cursor: pointer;
+}
+
+
+.total {
+  border-top: 1px solid #ccc;
+  padding-top: 5px;
+  margin-top: 10px;
+}
+
+    </style>
+</head>
+<body>
+
+    <div class="product">
+        <h2>Product</h2>
+        <div class="items">
+          <div class="item">
+            <span>Item 1</span>
+            <span class="cost">$10</span>
+            <button onclick="removeItem(10)">-</button>
+            <button onclick="addItem(10)">+</button>
+          </div>
+          <div class="item">
+            <span>Item 2</span>
+            <span class="cost">$15</span>
+            <button onclick="removeItem(15)">-</button>
+            <button onclick="addItem(15)">+</button>
+          </div>
+          <div class="item">
+            <span>Item 3</span>
+            <span class="cost">$20</span>
+            <button onclick="removeItem(20)">-</button>
+            <button onclick="addItem(20)">+</button>
+          </div>
+        </div>
+        <div class="total">
+          <h3>Total Cost: <span id="totalCost">$45</span></h3>
+        </div>
+      </div>
+      <script>
+       
+function removeItem(cost) {
+  var totalCostElement = document.getElementById('totalCost');
+  var currentTotalCost = parseInt(totalCostElement.innerText.slice(1)); 
+  var newTotalCost = currentTotalCost - cost;
+
+  if (newTotalCost < 0) {
+    newTotalCost = 0;
+  }
+
+  totalCostElement.innerText = '$' + newTotalCost; 
+
+  
+}
+
+
+function addItem(cost) {
+  var totalCostElement = document.getElementById('totalCost');
+  var currentTotalCost = parseInt(totalCostElement.innerText.slice(1)); 
+  var newTotalCost = currentTotalCost + cost;
+
+  if (newTotalCost < 0) {
+    newTotalCost = 0;
+  }
+
+  totalCostElement.innerText = '$' + newTotalCost; 
+
+  
+}
+
+      </script>
+    
+</body>
+</html>
