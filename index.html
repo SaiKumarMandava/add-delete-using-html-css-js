@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sai Kumar</title>
+    <title>Document</title>
 
     <style>
        
@@ -11,6 +11,14 @@
   margin: 20px;
   padding: 10px;
   border: 1px solid #ccc;
+}
+.product1{
+ 
+  display: flex;
+  justify-content: center;
+  
+  width: 300px;
+
 }
 
 .items {
@@ -25,8 +33,10 @@
 
 
 button {
-  padding: 3px 8px;
+  padding: 1px 5px;
   cursor: pointer;
+  border-radius: 100%;
+  
 }
 
 
@@ -36,70 +46,107 @@ button {
   margin-top: 10px;
 }
 
+.remove{
+  background: red;
+  color: white;
+}
+.add{
+  background: rgb(0, 157, 255);
+  color: white;
+}
+
+.msk{
+  display: flex;
+  gap:20px;
+}
     </style>
 </head>
 <body>
 
-    <div class="product">
-        <h2>Product</h2>
-        <div class="items">
-          <div class="item">
-            <span>Item 1</span>
-            <span class="cost">$10</span>
-            <button onclick="removeItem(10)">-</button>
-            <button onclick="addItem(10)">+</button>
+
+
+  <div class="product">
+  <div class="product1">
+    <img src="https://i.pinimg.com/736x/a9/62/ef/a962ef5ea8dfa25418c0a2b0057a64d4.jpg" width="300"/>
+  </div>
+   <div style="margin-top: 20px;">
+    <div class="items">
+      <div class="item">
+          <span>Item 1</span>
+          <span class="cost">₹10</span>
+          <div class="msk">
+            <button onclick="removeItem(10, this)" class="remove">&minus;</button>
+          <span class="quantity">1</span>
+          <button onclick="addItem(10, this)" class="add">&plus;</button>
           </div>
-          <div class="item">
-            <span>Item 2</span>
-            <span class="cost">$15</span>
-            <button onclick="removeItem(15)">-</button>
-            <button onclick="addItem(15)">+</button>
-          </div>
-          <div class="item">
-            <span>Item 3</span>
-            <span class="cost">$20</span>
-            <button onclick="removeItem(20)">-</button>
-            <button onclick="addItem(20)">+</button>
-          </div>
-        </div>
-        <div class="total">
-          <h3>Total Cost: <span id="totalCost">$45</span></h3>
-        </div>
       </div>
+      <div class="item">
+          <span>Item 2</span>
+          <span class="cost">₹15</span>
+         <div class="msk">
+          <button onclick="removeItem(15, this)" class="remove">&minus;</button>
+          <span class="quantity">1</span>
+          <button onclick="addItem(15, this)" class="add">&plus;</button>
+         </div>
+      </div>
+      <div class="item">
+          <span>Item 3</span>
+          <span class="cost">₹20</span>
+          <div class="msk">
+            <button onclick="removeItem(20, this)" class="remove">&minus;</button>
+          <span class="quantity">1</span>
+          <button onclick="addItem(20, this)" class="add">&plus;</button>
+          </div>
+      </div>
+  </div>
+   </div>
+    <div class="total">
+        <h3>Total Cost: <span id="totalCost" >₹45</span></h3>
+    </div>
+</div>
 
-    <div>Backend rasuko bro</div>
-      <script>
-       
-function removeItem(cost) {
-  var totalCostElement = document.getElementById('totalCost');
-  var currentTotalCost = parseInt(totalCostElement.innerText.slice(1)); 
-  var newTotalCost = currentTotalCost - cost;
+<script>
+    function removeItem(cost, button) {
+        var totalCostElement = document.getElementById('totalCost');
+        var currentTotalCost = parseInt(totalCostElement.innerText.slice(1));
+        var newTotalCost = currentTotalCost - cost;
 
-  if (newTotalCost < 0) {
-    newTotalCost = 0;
-  }
+        if (newTotalCost < 0) {
+            newTotalCost = 0;
+        }
 
-  totalCostElement.innerText = '$' + newTotalCost; 
+        totalCostElement.innerText = '₹' + newTotalCost;
 
-  
-}
+        var quantityElement = button.nextElementSibling;
+        var quantity = parseInt(quantityElement.textContent);
+        if (quantity > 1) {
+            quantity--;
+        } else {
+            quantity = 0;
+        }
+        quantityElement.textContent = quantity;
+    }
+
+    function addItem(cost, button) {
+        var totalCostElement = document.getElementById('totalCost');
+        var currentTotalCost = parseInt(totalCostElement.innerText.slice(1));
+        var newTotalCost = currentTotalCost + cost;
+
+        if (newTotalCost < 0) {
+            newTotalCost = 0;
+        }
+
+        totalCostElement.innerText = '₹' + newTotalCost;
+
+        var quantityElement = button.previousElementSibling;
+        var quantity = parseInt(quantityElement.textContent);
+        quantity++;
+        quantityElement.textContent = quantity;
+    }
+</script>
 
 
-function addItem(cost) {
-  var totalCostElement = document.getElementById('totalCost');
-  var currentTotalCost = parseInt(totalCostElement.innerText.slice(1)); 
-  var newTotalCost = currentTotalCost + cost;
-
-  if (newTotalCost < 0) {
-    newTotalCost = 0;
-  }
-
-  totalCostElement.innerText = '$' + newTotalCost; 
-
-  
-}
-
-      </script>
+    
     
 </body>
 </html>
